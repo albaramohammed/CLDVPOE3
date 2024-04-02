@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Welcome to KhumaloCraft Emporium";
+}
+
+<style>
+    /* Dark background */
+    body {
+        background-color: #333;
+        color: #fff; /* Text color */
+    }
+
+    /* Adjust text size */
+    h1 {
+        font-size: 36px; /* Big font size */
+        margin-bottom: 20px; /* Add some space after the title */
+        text-align: center; /* Align title to the center */
+    }
+
+    p {
+        font-size: 18px; /* Small font size */
+        text-align: center; /* Align paragraphs to the center */
+    }
+
+    /* Create rows */
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Align content in the center */
+        margin: 0 -15px; /* Adjust margin to create space between rows */
+    }
+
+    .col {
+        flex: 1;
+        padding: 0 15px; /* Adjust padding to create space between columns */
+        text-align: center; /* Align content in the center */
+    }
+
+    /* Button styles */
+    .btn {
+        background-color: #1b6ec2; /* Button background color */
+        color: #fff; /* Button text color */
+        padding: 10px 20px; /* Button padding */
+        border: none; /* Remove button border */
+        border-radius: 5px; /* Add border radius */
+        text-decoration: none; /* Remove underline */
+        display: inline-block; /* Display as inline block */
+        margin-top: 20px; /* Add space above the button */
+    }
+
+    /* Adjust image size */
+    img {
+        max-width: 100%; /* Ensure image does not exceed container width */
+        height: auto; /* Maintain aspect ratio */
+        display: block; /* Center image */
+        margin: 0 auto; /* Center image horizontally */
+        margin-bottom: 20px; /* Add space below the image */
+    }
+</style>
+
+<h1>@ViewData["Title"]</h1>
+<div class="row">
+    <div class="col">
+        <!-- Add pictures here -->
+        <img src="~/Images/Front1.jpg" alt="Product 1">
+        <!-- Add more images as needed -->
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p>Welcome to KhumaloCraft Emporium, your premier destination for discovering exquisite handcrafted products from artisans around the world!</p>
+        <p>At KhumaloCraft, we believe in celebrating creativity and craftsmanship. Our curated collection features a diverse range of artisanal creations, including jewelry, home decor, fashion accessories, and more. Each piece is meticulously crafted with passion and dedication, making it a unique treasure to cherish.</p>
+        <p>Discover the beauty of handmade craftsmanship and support talented artisans from diverse cultures and backgrounds. Whether you're looking for a special gift or adding a touch of elegance to your own space, KhumaloCraft offers something for everyone.</p>
+        <p>Explore our collection today and experience the magic of artisanal craftsmanship at KhumaloCraft Emporium!</p>
+        <a href="/Home/MyWork" class="btn">Explore Our Craftwork</a>
+    </div>
+</div>
