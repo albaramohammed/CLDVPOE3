@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CLDV1.Models.ViewModel.OrderViewModel>
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<style>
+    /* Add your custom styles here */
+    .order-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .order-table th,
+        .order-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .order-table th {
+            background-color: #f2f2f2;
+        }
+</style>
+
+<h2>Orders</h2>
+
+@if (Model.Any())
+{
+    @foreach (var order in Model)
+    {
+        <div>
+            <h3>Order #@order.OrderId</h3>
+            <p>Order Date: @order.OrderDate</p>
+            <p>Order Status: @order.OrderStatus</p>
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in order.OrderItems)
+                    {
+                        <tr>
+                            <td>@item.ProductName</td>
+                            <td>@item.Price.ToString("C")</td>
+                            <td>@item.Quantity</td>
+                            <td>@((item.Price * item.Quantity).ToString("C"))</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
+else
+{
+    <p>No orders found.</p>
+}

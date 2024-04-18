@@ -1,0 +1,106 @@
+﻿
+@model CLDV1.Models.ViewModel.SearchViewModel
+@{
+    ViewData["Title"] = "Search Products";
+}
+
+<style>
+    .search-form {
+        margin-bottom: 20px;
+    }
+
+    .product-card {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+    }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 3px;
+        }
+
+        .product-card h3 {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .product-card p {
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .product-card .price {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+    .pagination {
+        margin-top: 20px;
+    }
+
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
+</style>
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Search" method="get" class="search-form">
+    <div class="form-group">
+        <input type="text" name="query" class="form-control" placeholder="Search products..." value="@Model.SearchQuery" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+
+@if (Model.SearchResults != null && Model.SearchResults.Any())
+{
+    <p>Showing @Model.SearchResults.Count out of @Model.TotalCount results</p>
+    @foreach (var product in Model.SearchResults)
+    {
+        <div class="product-card">
+            <img src="@product.ImagePath" alt="@product.Name" />
+            <h3>@product.Name</h3>
+            <p>@product.Description</p>
+            <p class="price">Price: @product.Price.ToString("C")</p>
+            <a href="@Url.Action("Product", "Home", new { id = product.ProductId })" class="btn btn-primary">View Details</a>
+            <a href="#" class="btn btn-success">Add to Cart</a>
+        </div>
+    }
+
+    @if (Model.TotalCount > Model.PageSize)
+    {
+        <nav aria-label="Search results pages">
+            <ul class="pagination">
+                @for (int i = 1; i <= Math.Ceiling((double)Model.TotalCount / Model.PageSize); i++)
+                {
+                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Search", new { query = Model.SearchQuery, page = i })">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+}
+else
+{
+    <p>No products found matching your search criteria.</p>
+}
